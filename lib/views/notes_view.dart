@@ -15,12 +15,19 @@ class NotesView extends StatelessWidget {
           children: [
             SizedBox(height: 35),
             CustomAppbar(),
-            SizedBox(height: 5),
-            Expanded(
-              child: NotesListView(),
-            ),
+            Expanded(child: NotesListView(),),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        shape: OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(50)),
+          borderSide: BorderSide.none,
+        ),
+        elevation: 10,
+        backgroundColor: Color(0xFF54EED8),
+          onPressed: (){},
+          child: Icon(Icons.add , color: Colors.black,),
       ),
     );
   }
