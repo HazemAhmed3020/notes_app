@@ -7,8 +7,8 @@ class NoteItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(
-        top: 24,
-        bottom: 24,
+        top: 32,
+        bottom: 32,
         left: 15,
         right: 8,
       ),
@@ -27,7 +27,7 @@ class NoteItem extends StatelessWidget {
               style: TextStyle(fontSize: 30, color: Colors.black),
             ),
             subtitle: Padding(
-              padding: const EdgeInsets.only(top: 10.0),
+              padding: const EdgeInsets.only(top: 15.0),
               child: Text(
                 'Build your career with tharwat samy',
                 style: TextStyle(fontSize: 20, color: Colors.black26),
@@ -38,7 +38,7 @@ class NoteItem extends StatelessWidget {
               icon: Icon(Icons.delete, color: Colors.black, size: 35),
             ),
           ),
-          SizedBox(height: 10,),
+          SizedBox(height: 15,),
           Padding(
             padding: const EdgeInsets.only(right: 10.0),
             child: Text('May 21,2022',textAlign: TextAlign.end ,style: TextStyle(color: Colors.black26),),
