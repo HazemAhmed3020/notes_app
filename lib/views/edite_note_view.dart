@@ -10,17 +10,15 @@ import '../widgets/custom_appbar.dart';
      return Scaffold(
        body: Padding(
          padding: EdgeInsets.all(18),
-         child: Container(
-           child: Column(
-             children: [
-               SizedBox(height: 35),
-               CustomAppbar(icon: Icons.check, title: 'Edit Note',),
-               SizedBox(height: 30,),
-               CustomTextField(hintTxt: 'Title'),
-               SizedBox(height: 30,),
-               CustomTextField(hintTxt: 'content', maxLines: 7,),
-             ],
-           ),
+         child: Column(
+           children: [
+             SizedBox(height: 35),
+             CustomAppbar(icon: Icons.check, title: 'Edit Note',),
+             SizedBox(height: 30,),
+             CustomTextField(hintTxt: 'Title'),
+             SizedBox(height: 30,),
+             CustomTextField(hintTxt: 'content', maxLines: 7,),
+           ],
          ),
 
        ),
