@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
@@ -19,7 +20,6 @@ class _AddNoteBottomSheetState extends State<AddNoteBottomSheet> {
   final AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
   String? title;
   String? content;
-  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,9 @@ class _AddNoteBottomSheetState extends State<AddNoteBottomSheet> {
       child: BlocConsumer<AddNoteCubit, AddNoteState>(
         listener: (context, state) {
           if (state is AddNoteFailed) {
-            print(state.errMassage);
+            if (kDebugMode) {
+              print(state.errMassage);
+            }
           } else if (state is AddNoteSuccess) {
             BlocProvider.of<NoteCubit>(context).fetchAllNotes();
             Navigator.pop(context);
