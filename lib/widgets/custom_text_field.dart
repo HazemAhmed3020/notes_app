@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 class CustomTextField extends StatelessWidget {
- const CustomTextField({super.key, required this.hintTxt, this.maxLines = 1, this.onSaved,});
+ const CustomTextField({super.key, required this.hintTxt, this.maxLines = 1, this.onSaved, this.onChanged,});
   final String hintTxt;
   final int maxLines;
  final void Function(String?)? onSaved;
-
+ final void Function(String)? onChanged;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -18,6 +18,7 @@ class CustomTextField extends StatelessWidget {
           return null;
         }
       },
+      onChanged: onChanged,
       onSaved: onSaved,
       maxLines: maxLines,
       decoration: InputDecoration(
