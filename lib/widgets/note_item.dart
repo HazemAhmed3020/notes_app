@@ -1,11 +1,14 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notes_app_exmp/models/note_model.dart';
 import 'package:notes_app_exmp/views/edite_note_view.dart';
 
+import '../cubits/note_cubit/note_cubit.dart';
+
 class NoteItem extends StatelessWidget {
   const NoteItem({super.key, required this.noteModel});
- final NoteModel noteModel;
+  final NoteModel noteModel;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -41,7 +44,10 @@ class NoteItem extends StatelessWidget {
                 ),
               ),
               trailing: IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  noteModel.delete();
+                  BlocProvider.of<NoteCubit>(context).fetchAllNotes();
+                },
                 icon: Icon(Icons.delete, color: Colors.black, size: 35),
               ),
             ),

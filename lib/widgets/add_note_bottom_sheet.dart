@@ -23,70 +23,71 @@ class _AddNoteBottomSheetState extends State<AddNoteBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => AddNoteCubit(),
-      child: BlocConsumer<AddNoteCubit, AddNoteState>(
-        listener: (context, state) {
-          if (state is AddNoteFailed) {
-            if (kDebugMode) {
-              print(state.errMassage);
-            }
-          } else if (state is AddNoteSuccess) {
-            BlocProvider.of<NoteCubit>(context).fetchAllNotes();
-            Navigator.pop(context);
+    return BlocConsumer<AddNoteCubit, AddNoteState>(
+      listener: (context, state) {
+        if (state is AddNoteFailed) {
+          if (kDebugMode) {
+            print(state.errMassage);
           }
-        },
-        builder: (context, state) {
-          return Form(
-            key: formKey,
-            child: ModalProgressHUD(
-              inAsyncCall: state is AddNoteLoading ? true : false,
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: ListView(
-                  children: [
-                    Column(
-                      children: [
-                        SizedBox(height: 20),
-                        CustomTextField(
-                          hintTxt: 'Title',
-                          onSaved: (data) {
-                            title = data;
-                          },
-                        ),
-                        SizedBox(height: 15),
-                        CustomTextField(
-                          hintTxt: 'Content',
-                          maxLines: 5,
-                          onSaved: (data) {
-                            content = data;
-                          },
-                        ),
-                        SizedBox(height: 100),
-                        CustomButton(
-                          txt: 'Add',
-                          onTap: () async {
-                            if (formKey.currentState!.validate()) {
-                              formKey.currentState!.save();
-                              var newNote = NoteModel(
-                                title: title!,
-                                subTitle: content!,
-                                date: DateTime.now().timeZoneName,
-                                color: Colors.orangeAccent.toARGB32(),
-                              );
-                              context.read<AddNoteCubit>().addAllNotes(newNote);
-                            }
-                          },
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+        } else if (state is AddNoteSuccess) {
+          BlocProvider.of<NoteCubit>(context).fetchAllNotes();
+          Navigator.pop(context);
+        }
+      },
+      builder: (context, state) {
+        return Form(
+          key: formKey,
+          child: ModalProgressHUD(
+            inAsyncCall: state is AddNoteLoading ? true : false,
+            child: Padding(
+              padding: EdgeInsets.only(
+                left: 10,
+                right: 10,
+                bottom: MediaQuery.of(context).viewInsets.bottom,
+              ),
+              child: ListView(
+                children: [
+                  Column(
+                    children: [
+                      SizedBox(height: 20),
+                      CustomTextField(
+                        hintTxt: 'Title',
+                        onSaved: (data) {
+                          title = data;
+                        },
+                      ),
+                      SizedBox(height: 15),
+                      CustomTextField(
+                        hintTxt: 'Content',
+                        maxLines: 5,
+                        onSaved: (data) {
+                          content = data;
+                        },
+                      ),
+                      SizedBox(height: 100),
+                      CustomButton(
+                        txt: 'Add',
+                        onTap: () async {
+                          if (formKey.currentState!.validate()) {
+                            formKey.currentState!.save();
+                            var newNote = NoteModel(
+                              title: title!,
+                              subTitle: content!,
+                              date: DateTime.now().timeZoneName,
+                              color: Colors.orangeAccent.toARGB32(),
+                            );
+                            context.read<AddNoteCubit>().addAllNotes(newNote);
+                          }
+                        },
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 }
