@@ -8,6 +8,8 @@ import 'package:notes_app_exmp/models/note_model.dart';
 import 'package:notes_app_exmp/widgets/custom_bottom.dart';
 import 'package:notes_app_exmp/widgets/custom_text_field.dart';
 
+import 'colors_list.dart';
+
 class AddNoteBottomSheet extends StatefulWidget {
   const AddNoteBottomSheet({super.key});
 
@@ -64,7 +66,9 @@ class _AddNoteBottomSheetState extends State<AddNoteBottomSheet> {
                           content = data;
                         },
                       ),
-                      SizedBox(height: 100),
+                      SizedBox(height: 15),
+                      const ColorsListView(),
+                      SizedBox(height: 50),
                       CustomButton(
                         txt: 'Add',
                         onTap: () async {

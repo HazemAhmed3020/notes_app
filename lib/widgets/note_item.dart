@@ -13,7 +13,7 @@ class NoteItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context)=> EditeNoteView()));
+        Navigator.push(context, MaterialPageRoute(builder: (context)=> EditeNoteView(noteModel: noteModel,)));
       },
       child: Container(
         padding: EdgeInsets.only(
@@ -24,7 +24,7 @@ class NoteItem extends StatelessWidget {
         ),
         margin: EdgeInsets.only(bottom: 10),
         decoration: BoxDecoration(
-          color: Color(0xFFFFCD7A),
+          color: Color(noteModel.color),
           borderRadius: BorderRadius.all(Radius.circular(24)),
         ),
         child: Column(

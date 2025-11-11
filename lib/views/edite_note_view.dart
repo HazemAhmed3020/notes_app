@@ -7,8 +7,8 @@ import '../cubits/note_cubit/note_cubit.dart';
 import '../widgets/custom_appbar.dart';
 
 class EditeNoteView extends StatefulWidget {
-  const EditeNoteView({super.key});
-
+  const EditeNoteView({super.key, required this.noteModel});
+  final NoteModel noteModel;
   @override
   State<EditeNoteView> createState() => _EditeNoteViewState();
 }
@@ -16,7 +16,6 @@ class EditeNoteView extends StatefulWidget {
 class _EditeNoteViewState extends State<EditeNoteView> {
   String? title;
   String? content;
-  NoteModel? noteModel;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +29,9 @@ class _EditeNoteViewState extends State<EditeNoteView> {
               icon: Icons.check,
               title: 'Edit Note',
               onTap: () {
-                noteModel!.save();
+                widget.noteModel.title = title ?? widget.noteModel.title;
+                widget.noteModel.subTitle = content ?? widget.noteModel.subTitle;
+                widget.noteModel.save();
                 BlocProvider.of<NoteCubit>(context).fetchAllNotes();
                 Navigator.pop(context);
               },
@@ -39,11 +40,7 @@ class _EditeNoteViewState extends State<EditeNoteView> {
             CustomTextField(
               hintTxt: 'Title',
               onChanged: (data) {
-                if (data.isEmpty) {
-                  title = noteModel!.title;
-                } else {
                   title = data;
-                }
               },
             ),
             SizedBox(height: 30),
@@ -51,11 +48,7 @@ class _EditeNoteViewState extends State<EditeNoteView> {
               hintTxt: 'content',
               maxLines: 7,
               onChanged: (data) {
-                if (data.isEmpty) {
-                  content = noteModel!.subTitle;
-                } else {
                   content = data;
-                }
               },
             ),
           ],
